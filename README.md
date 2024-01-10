@@ -1,2 +1,2 @@
 # TestServ-Bot
-テストサーバー向けbotです。
+https://mcsv.life/ のテストサーバー向けbotです。
