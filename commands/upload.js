@@ -1,22 +1,19 @@
 const { SlashCommandBuilder } = require('discord.js');
 const config = require("../config.json");
 const path = require('path');
-const fs = require('fs')
+const fs = require('fs');
+const axios = require('axios')
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('deploy')
-        .setDescription('ファイルをcdnにデプロイ')
+        .setDescription('ファイルをサーバーにデプロイ')
         .addAttachmentOption(option =>
             option
                 .setName("file")
                 .setRequired(true)
-                .setDescription("デプロイするファイル"))
-        .addStringOption(option =>
-            option
-                .setName("filename")
-                .setDescription("ファイル名")
-        ),
+                .setDescription("デプロイするファイル")
+		),
     execute: async function (
         /** @type {import('discord.js').CommandInteraction} */
         interaction) {
@@ -30,8 +27,8 @@ module.exports = {
             });
         }
         await interaction.deferReply();
-        const file = interaction.options.getAttachment('file');
-        const filename = interaction.options.getString('filename') || file.name;
+		let res = await axios.get(file.attachment.proxyURL,{ responseType: "arraybuffer" });
+		let file = Buffer.from(res.data);
 
         try {
             // サーバー内の保存ディレクトリのパス
