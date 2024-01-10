@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const config = require("../config.json");
 const path = require('path');
-const fs = require('fs').promises
+const fs = require('fs')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -41,7 +41,7 @@ module.exports = {
             const filePath = path.join(saveDirectory, filename);
 
             // ファイルを保存
-            await fs.writeFile(filePath, file.content);
+            await fs.writeFileSync(filePath, file);
 
             interaction.editReply(`${filename}をデプロイしました!`);
         } catch (e) {
