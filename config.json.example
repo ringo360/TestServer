@@ -1,0 +1,5 @@
+{
+	"token": "put ur token",
+	"savepath": "ur dir",
+	"allowlist": ["00000000000000000000000", "11111111111111"]
+}
