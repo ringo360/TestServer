@@ -43,7 +43,7 @@ module.exports = {
             // ファイルを保存
             await fs.writeFileSync(filePath, file);
 
-            interaction.editReply(`${filename}をデプロイしました!`);
+            interaction.editReply(`${attachment.name}をデプロイしました!`);
         } catch (e) {
             await interaction.editReply({
                 embeds: [{
