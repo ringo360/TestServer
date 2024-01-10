@@ -5,13 +5,13 @@ const fs = require('fs')
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('upload')
-        .setDescription('ファイルをcdnにアップロード')
+        .setName('deploy')
+        .setDescription('ファイルをcdnにデプロイ')
         .addAttachmentOption(option =>
             option
                 .setName("file")
                 .setRequired(true)
-                .setDescription("アップロードするファイル"))
+                .setDescription("デプロイするファイル"))
         .addStringOption(option =>
             option
                 .setName("filename")
@@ -43,7 +43,7 @@ module.exports = {
             // ファイルを保存
             await fs.writeFile(filePath, file.content);
 
-            interaction.editReply(`${filename}をアップロードしました!`);
+            interaction.editReply(`${filename}をデプロイしました!`);
 			/*
             const user = interaction.user;
             const dmChannel = await user.createDM();
