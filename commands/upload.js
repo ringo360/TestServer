@@ -27,10 +27,10 @@ module.exports = {
             });
         }
         await interaction.deferReply();
-        let tmp = interaction.options.getAttachment('file');
-		await interaction.editReply(`${tmp.attachment}をデプロイ中...`)
-		console.log(tmp.attachment);
-		let res = await axios.get(tmp.attachment,{ responseType: "arraybuffer" });
+        let attachment = interaction.options.getAttachment('file');
+		await interaction.editReply(`${attachment.attachment}をデプロイ中...`)
+		console.log(attachment.attachment);
+		let res = await axios.get(attachment.attachment,{ responseType: "arraybuffer" });
 		let file = Buffer.from(res.data);
 
         try {
@@ -38,7 +38,7 @@ module.exports = {
             const saveDirectory = config.savepath
             
             // ファイルの保存先のパス
-            const filePath = path.join(saveDirectory, filename);
+            const filePath = path.join(saveDirectory, attachment.name);
 
             // ファイルを保存
             await fs.writeFileSync(filePath, file);
