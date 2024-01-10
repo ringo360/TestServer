@@ -47,17 +47,15 @@ client.on('ready', async () => {
 	console.log(`${cgreen}Logged in as${creset} ${client.user.tag}`);
 	client.user.setPresence({
 		activities: [{
-			name: `Created by ringoXD`,
+			name: `play.mcsv.life`,
 			state: `uwu`,
-			type: ActivityType.Playing,
+			type: ActivityType.Watching,
 		}],
-		status: "dnd",
+		status: "idle",
 	});
 	console.log(`Registering commands...`)
 	await client.application.commands.set(commands.map(x => x.data.toJSON()));
 	console.log(`${cgreen}Ready!${creset}`);
-	let SyslogChannel = client.channels.cache.get("1151139585791901746");
-	SyslogChannel.send('Discord.js Bot is Ready!')
 })
 
 
