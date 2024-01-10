@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const config = require("../config.json");
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs')
 const axios = require('axios')
 
 module.exports = {
@@ -27,7 +27,8 @@ module.exports = {
             });
         }
         await interaction.deferReply();
-		let res = await axios.get(file.attachment.proxyURL,{ responseType: "arraybuffer" });
+        let tmp = interaction.options.getAttachment('file');
+		let res = await axios.get(tmp.attachment.proxyURL,{ responseType: "arraybuffer" });
 		let file = Buffer.from(res.data);
 
         try {
