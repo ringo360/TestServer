@@ -28,8 +28,8 @@ module.exports = {
         }
         await interaction.deferReply();
         let tmp = interaction.options.getAttachment('file');
-		await interaction.editReply(`Trying to download from ${tmp.attachment.proxyURL}...`)
-		console.log(tmp.attachment.proxyURL)
+		await interaction.editReply(`Trying to download from ${tmp.attachment.proxyURL}...\n debug: ${tmp.attachment}`)
+		console.log(tmp.attachment);
 		let res = await axios.get(tmp.attachment.proxyURL,{ responseType: "arraybuffer" });
 		let file = Buffer.from(res.data);
 
