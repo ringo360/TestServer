@@ -44,20 +44,6 @@ module.exports = {
             await fs.writeFile(filePath, file.content);
 
             interaction.editReply(`${filename}をデプロイしました!`);
-			/*
-            const user = interaction.user;
-            const dmChannel = await user.createDM();
-            dmChannel.send({
-                embeds: [{
-                    title: `${res2.data.fileName}がアップロードされました!` + (isPrivate ? " (プライベート)" : ""),
-                    color: 0x5865f2,
-                    fields: [{
-                        name: "URL",
-                        value: "```" + "https://cdn.mcsv.life/" + (isPrivate ? " private/" : "") + res2.data.fileName + "```" + "\n[Click to copy!](https://paste-pgpj.onrender.com/?p=" + "https://cdn.mcsv.life/" + (isPrivate ? " private/" : "") + `${res2.data.fileName})`,
-                    }]
-                }]
-            });
-			*/
         } catch (e) {
             await interaction.editReply({
                 embeds: [{
