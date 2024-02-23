@@ -24,6 +24,8 @@ async function replaceColorsWithANSI(input) {
         'e': '\x1b[93m', // Yellow
         'f': '\x1b[97m', // White
         'r': '\x1b[0m',  // Reset
+		'l': '\x1b[1m',  // Bold
+        'o': '\x1b[3m',  // Italic
     };
 
     return input.replace(/§([0-9a-fr])/ig, (match, group) => colorMap[group.toLowerCase()] || '');
