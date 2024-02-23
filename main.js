@@ -45,14 +45,6 @@ const client = new Client(options);
 client.on('ready', async () => {
 	client.templinks = [];
 	console.log(`${cgreen}Logged in as${creset} ${client.user.tag}`);
-	client.user.setPresence({
-		activities: [{
-			name: `play.mcsv.life`,
-			state: `uwu`,
-			type: ActivityType.Watching,
-		}],
-		status: "idle",
-	});
 	console.log(`Registering commands...`)
 	await client.application.commands.set(commands.map(x => x.data.toJSON()));
 	console.log(`${cgreen}Ready!${creset}`);
