@@ -43,12 +43,12 @@ module.exports = {
             // ファイルを保存
             await fs.writeFileSync(filePath, file);
 
-            interaction.editReply(`${attachment.name}をデプロイしました!`);
+            interaction.editReply('`' + attachment.name + '`をデプロイしました!');
         } catch (e) {
             await interaction.editReply({
                 embeds: [{
                     title: "エラー",
-                    description: '管理者がミスをしました。鯖ログを見るよう指示してください。' + '\n```' + e + '\n```',
+                    description: 'ねえ、このエラーどうにかしてよ。' + '\n```' + e + '\n```',
                     color: 0xff0000,
                     footer: {
                         text: "uwu"
