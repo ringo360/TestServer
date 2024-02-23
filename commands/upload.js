@@ -96,7 +96,7 @@ module.exports = {
 			console.log(await rcon.send(`discord bcast ${attachment.name}がデプロイされました！(実行者: ${interaction.user.username})`))
 			console.log("Closing Connection...")
 			await rcon.end()
-			interaction.editReply('`' + attachment.name + '`をデプロイしました!\n実行結果:\n```ansi' + parsedmsg + '\n```');
+			interaction.editReply('`' + attachment.name + '`をデプロイしました!\n実行結果:\n```ansi\n' + parsedmsg + '\n```');
 		} catch (e) {
 			await interaction.editReply({
                 embeds: [{
