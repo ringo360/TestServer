@@ -65,12 +65,12 @@ module.exports = {
 			});
 			await rcon.connect()
 			console.log("Sending Request...")
-			console.log(await rcon.send(`sk reload ${attachment.name}`))
+			const result = await rcon.send(`sk reload ${attachment.name}`)
 			console.log(await rcon.send(`say ${attachment.name}がデプロイされました！`))
 			console.log(await rcon.send(`discord bcast ${attachment.name}がデプロイされました！(実行者: ${interaction.user.username})`))
 			console.log("Closing Connection...")
 			await rcon.end()
-			interaction.editReply('`' + attachment.name + '`をデプロイしました!');
+			interaction.editReply('`' + attachment.name + '`をデプロイしました!\n実行結果:\n```' + result + '\n```');
 		} catch (e) {
 			await interaction.editReply({
                 embeds: [{
