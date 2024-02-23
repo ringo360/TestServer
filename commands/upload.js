@@ -5,7 +5,7 @@ const fs = require('fs')
 const axios = require('axios')
 const { Rcon } = require('rcon-client');
 
-function replaceColorsWithANSI(input) {
+async function replaceColorsWithANSI(input) {
     const colorMap = {
         '0': '\x1b[30m', // Black
         '1': '\x1b[34m', // Dark Blue
