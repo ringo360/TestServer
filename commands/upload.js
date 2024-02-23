@@ -3,6 +3,7 @@ const config = require("../config.json");
 const path = require('path');
 const fs = require('fs')
 const axios = require('axios')
+const { Rcon } = require('rcon-client');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -42,8 +43,6 @@ module.exports = {
 
             // ファイルを保存
             await fs.writeFileSync(filePath, file);
-
-            interaction.editReply('`' + attachment.name + '`をデプロイしました!');
         } catch (e) {
             await interaction.editReply({
                 embeds: [{
@@ -51,11 +50,39 @@ module.exports = {
                     description: 'ねえ、このエラーどうにかしてよ。' + '\n```' + e + '\n```',
                     color: 0xff0000,
                     footer: {
-                        text: "uwu"
+                        text: "failed to upload!"
                     }
                 }]
             })
 			console.log(e);
         }
+        try {
+			console.log(`Connecting to ${config.rconhost1}:${config.rconport1}...`)
+			const rcon = new Rcon({
+				host: config.rconhost1,
+				port: config.rconport1,
+				password: config.rconpass1
+			});
+			await rcon.connect()
+			console.log("Sending Request...")
+			console.log(await rcon.send(`sk reload ${attachment.name}`))
+			console.log(await rcon.send(`say ${attachment.name}がデプロイされました！`))
+			console.log(await rcon.send(`discord bcast ${attachment.name}がデプロイされました！(実行者: ${interaction.user.username})`))
+			console.log("Closing Connection...")
+			await rcon.end()
+			interaction.editReply('`' + attachment.name + '`をデプロイしました!');
+		} catch (e) {
+			await interaction.editReply({
+                embeds: [{
+                    title: "エラー",
+                    description: 'ねえ、このエラーどうにかしてよ。' + '\n```' + e + '\n```',
+                    color: 0xff0000,
+                    footer: {
+                        text: "failed to reload skript!"
+                    }
+                }]
+            })
+			console.log(e);
+		}
     },
 };

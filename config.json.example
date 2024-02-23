@@ -1,5 +1,8 @@
 {
 	"token": "put ur token",
 	"savepath": "ur dir",
-	"allowlist": ["00000000000000000000000", "11111111111111"]
+	"allowlist": ["00000000000000000000000", "11111111111111"],
+	"rconhost1": "localhost",
+	"rconport1": "25576",
+	"rconpass1": "password"
 }
