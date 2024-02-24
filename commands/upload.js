@@ -82,6 +82,7 @@ module.exports = {
                 }]
             })
 			console.log(e);
+			return;
         }
         try {
 			console.log(`Connecting to ${config.rconhost1}:${config.rconport1}...`)
@@ -93,12 +94,33 @@ module.exports = {
 			await rcon.connect()
 			console.log("Sending Request...")
 			const result = await rcon.send(`sk reload ${attachment.name}`)
-			const parsedmsg = await replaceColorsWithANSI(result)
+			const length = await result.length
+			let parsedmsg = 'なし'
+			let shouldattachment = false
+			if (length >= 1800) {
+				const colorCodeRegex = /§[0-9a-fklmnor]/g;
+				parsedmsg = await result.replace(colorCodeRegex, '');
+				shouldattachment = true
+			} else {
+				parsedmsg = await replaceColorsWithANSI(result)
+				shouldattachment = false
+			}
+			
 			console.log(await rcon.send(`say ${attachment.name}がデプロイされました！`))
 			console.log(await rcon.send(`discord bcast ${attachment.name}がデプロイされました！(実行者: ${interaction.user.username})`))
 			console.log("Closing Connection...")
 			await rcon.end()
-			interaction.editReply('`' + attachment.name + '`をデプロイしました!\n実行結果:\n```ansi\n' + parsedmsg + '\n```');
+			if (shouldattachment === true) {
+				return interaction.editReply({
+					content: `${attachment.name}をデプロイしました!\n実行結果:`,
+					files: [{
+						attachment: Buffer.from(parsedmsg),
+						name: `result.txt`
+					}]
+				})
+			} else {
+				return interaction.editReply('`' + attachment.name + '`をデプロイしました!\n実行結果:\n```ansi\n' + parsedmsg + '\n```');
+			}
 		} catch (e) {
 			await interaction.editReply({
                 embeds: [{
