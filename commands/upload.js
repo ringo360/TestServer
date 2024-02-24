@@ -28,7 +28,7 @@ async function replaceColorsWithANSI(input) {
         'o': '\x1b[3m',  // Italic
     };
 
-    return input.replace(/§([0-9a-fr])/ig, (match, group) => colorMap[group.toLowerCase()] || '');
+    return input.replace(/§([0-9a-fklmnor])/ig, (match, group) => colorMap[group.toLowerCase()] || '');
 }
 
 
